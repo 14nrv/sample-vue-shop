@@ -115,7 +115,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .payment {
   border: 1px solid #ccc;
   color: black;
