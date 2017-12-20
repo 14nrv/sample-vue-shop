@@ -28,7 +28,9 @@ body {
   height: 100%;
   margin: 0;
 }
-
+body {
+  overflow-x: hidden;
+}
 .clear {
   clear: both;
 }
