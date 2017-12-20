@@ -14,5 +14,9 @@ export default {
       state.cart[item.name] = stateItem
     }
   },
+  REMOVE_ITEM: (state, item) => {
+    state.cartTotal = state.cartTotal - item.count
+    delete state.cart[item.name]
+  },
   UPDATE_HIGH_PRICE: (state, value) => state.highprice = value
 }

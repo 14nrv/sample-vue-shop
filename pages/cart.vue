@@ -11,6 +11,7 @@
           <p>{{ item.price | usdollar }} x {{ item.count }}</p>
           <p>Total for this item: <strong>{{ item.price * item.count }}</strong></p>
         </div>
+        <button class="removeItem" @click="removeItem(item)">x</button>
         <img class="cartimg" :src="`/${item.img}`" :alt="`Image of ${item.name}`">
       </div>
       <div class="total">
@@ -54,13 +55,16 @@ export default {
     total() {
       return Object.values(this.cart)
         .reduce((acc, {count, price}) => acc + (count * price), 0)
-        .toFixed(2);
+        .toFixed(2)
     }
   },
   filters: {
     usdollar: function(value) {
       return `$${value}`
     }
+  },
+  methods: {
+    ...mapActions(['removeItem'])
   }
 }
 </script>
@@ -85,7 +89,7 @@ export default {
 }
 
 .cartitems {
-  padding: 30px;
+  padding: 30px 0;
   border-bottom: 1px solid #ccc;
   width: 500px;
 }
@@ -108,5 +112,15 @@ export default {
 
 .total {
   margin: 20px 0;
+}
+
+.removeItem {
+  float: right;
+  padding: 0;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 13px;
+  margin-top: 32px;
 }
 </style>
