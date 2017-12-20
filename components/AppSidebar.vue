@@ -10,7 +10,7 @@
         :min="min"
         :max="max"
         step="0.1"
-        @input="$emit('update:pricerange', $event.target.value)"
+        @input="updateHighprice($event.target.value)"
       />
       <span class="min">${{ min }}</span>
       <span class="max">${{ max }}</span>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import AppSwitch from './AppSwitch.vue'
 
 export default {
@@ -49,6 +50,9 @@ export default {
   },
   components: {
     AppSwitch
+  },
+  methods: {
+    ...mapActions(['updateHighprice'])
   }
 }
 </script>

@@ -36,9 +36,10 @@
 </template>
 
 <script>
-import { Card, createToken } from 'vue-stripe-elements-plus'
-import AppLoader from './AppLoader.vue'
 import axios from 'axios'
+import { Card, createToken } from 'vue-stripe-elements-plus'
+import { mapActions } from 'vuex'
+import AppLoader from './AppLoader.vue'
 
 export default {
   components: {
@@ -69,6 +70,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['clearCartCount', 'clearCartContents']),
     pay() {
       createToken().then(data => {
         this.submitted = true
@@ -90,7 +92,9 @@ export default {
           .then(response => {
             this.status = 'success'
             this.$emit('successSubmit')
-            this.$store.commit('clearCartCount')
+
+            this.clearCartCount()
+            this.clearCartContents()
 
             // console logs for you :)
             this.response = JSON.stringify(response, null, 2)

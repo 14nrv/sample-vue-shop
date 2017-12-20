@@ -4,8 +4,8 @@
     <div v-if="cartTotal > 0">
       <h1>Cart</h1>
       <div class="cartitems"
-        v-for="item in cart"
-        key="item">
+           v-for="item in cart"
+           :key="item.name">
         <div class="carttext">
           <h4>{{ item.name }}</h4>
           <p>{{ item.price | usdollar }} x {{ item.count }}</p>
@@ -35,8 +35,9 @@
 </template>
 
 <script>
-import AppCheckout from './../components/AppCheckout.vue'
-import AppSuccess from './../components/AppSuccess.vue'
+import { mapGetters, mapActions } from 'vuex'
+import AppCheckout from '@/components/AppCheckout.vue'
+import AppSuccess from '@/components/AppSuccess.vue'
 
 export default {
   data() {
@@ -49,16 +50,11 @@ export default {
     AppSuccess
   },
   computed: {
-    cart() {
-      return this.$store.state.cart
-    },
-    cartTotal() {
-      return this.$store.state.cartTotal
-    },
+    ...mapGetters(['cart', 'cartTotal']),
     total() {
       return Object.values(this.cart)
-        .reduce((acc, el) => acc + (el.count * el.price), 0)
-        .toFixed(2)
+        .reduce((acc, {count, price}) => acc + (count * price), 0)
+        .toFixed(2);
     }
   },
   filters: {

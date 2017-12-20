@@ -2,7 +2,7 @@
   <div class="sidearea">
     <h4>Only Show Sale Items</h4>
     <div class="can-toggle demo-rebrand-2">
-      <input id="e" type="checkbox" v-model="trigger" @change="updateSale">
+      <input id="e" type="checkbox" v-model="trigger">
       <label for="e">
         <div class="can-toggle__switch" data-checked="Yes" data-unchecked="No"></div>
       </label>
@@ -12,19 +12,10 @@
 
 <script>
 export default {
-  data() {
-    return {
-      trigger: this.checked
-    }
-  },
   computed: {
-    checked() {
-      return this.$store.state.sale
-    }
-  },
-  methods: {
-    updateSale() {
-      this.$store.commit('switchSale')
+    trigger: {
+      get() { return this.$store.state.sale },
+      set() { return this.$store.dispatch('switchSale') }
     }
   }
 }

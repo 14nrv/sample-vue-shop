@@ -1,14 +1,16 @@
 <template>
   <div class="item">
-    <p>{{ item.name }}</p>
+    <p class="item-name">{{ item.name }}</p>
     <span class="salepill" v-if="item.sale">Sale</span>
     <img :src="`/${item.img}`" :alt="`Image of ${item.name}`">
-    <p>{{ item.price | usdollar }}</p>
-    <button class="add" @click="addItem">Add Item</button>
+    <p clas="item-price">{{ item.price | usdollar }}</p>
+    <button class="add" @click="addItem(item)">Add Item</button>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   props: {
     item: {
@@ -26,9 +28,7 @@ export default {
     }
   },
   methods: {
-    addItem() {
-      this.$store.commit('addItem', this.item)
-    }
+    ...mapActions(['addItem'])
   }
 }
 </script>

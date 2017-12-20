@@ -35,11 +35,10 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   computed: {
-    cartTotal() {
-      return this.$store.state.cartTotal
-    }
+    ...mapGetters(['cartTotal'])
   }
 }
 </script>

@@ -5,8 +5,8 @@
       <app-sidebar :pricerange.sync="highprice"/>
       <transition-group name="items" tag="section" class="content">
         <app-item
-          v-for="(item, index) in wProducts"
-          key="item"
+          v-for="(item, index) in womenProducts"
+          :key="item.name"
           :item="item"
           :index="index"
         />
@@ -16,9 +16,10 @@
 </template>
 
 <script>
-import AppSidebar from './../components/AppSidebar.vue'
-import AppMasthead from './../components/AppMasthead.vue'
-import AppItem from './../components/AppItem.vue'
+import { mapGetters } from 'vuex'
+import AppSidebar from '@/components/AppSidebar.vue'
+import AppMasthead from '@/components/AppMasthead.vue'
+import AppItem from '@/components/AppItem.vue'
 
 export default {
   components: {
@@ -26,19 +27,8 @@ export default {
     AppMasthead,
     AppItem
   },
-  data() {
-    return {
-      highprice: 300
-    }
-  },
   computed: {
-    wProducts() {
-      return this.$store.getters.women.filter(el =>
-        this.$store.state.sale
-          ? el.price < this.highprice && el.sale
-          : el.price < this.highprice
-      )
-    }
+    ...mapGetters(['womenProducts', 'highprice'])
   }
 }
 </script>
