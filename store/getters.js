@@ -10,6 +10,7 @@ const getProductsUnderHighPrice = (products, showSale, highprice) =>
 export default {
   cart: ({ cart }) => cart,
   cartTotal: ({ cartTotal }) => cartTotal,
+  cartAmount: ({ cartAmount }) => cartAmount,
   highprice: ({ highprice }) => highprice,
   showSale: ({ sale }) => sale,
   allProducts: ({ products }) => products,

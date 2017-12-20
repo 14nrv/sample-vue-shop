@@ -15,9 +15,9 @@
         <img class="cartimg" :src="`/${item.img}`" :alt="`Image of ${item.name}`">
       </div>
       <div class="total">
-        <h3>Total: {{ total | usdollar }}</h3>
+        <h3>Total: {{ cartAmount | usdollar }}</h3>
       </div>
-      <app-checkout :total="total" @successSubmit="success = true"></app-checkout>
+      <app-checkout :total="cartAmount" @successSubmit="success = true"></app-checkout>
     </div>
 
     <div v-else-if="cartTotal === 0 && success === false" class="empty">
@@ -51,12 +51,7 @@ export default {
     AppSuccess
   },
   computed: {
-    ...mapGetters(['cart', 'cartTotal']),
-    total() {
-      return Object.values(this.cart)
-        .reduce((acc, {count, price}) => acc + (count * price), 0)
-        .toFixed(2)
-    }
+    ...mapGetters(['cart', 'cartTotal', 'cartAmount'])
   },
   filters: {
     usdollar: function(value) {
